@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mybooks">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Books</title>
+    <base href="/">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="app.css" type="text/css" rel="stylesheet">
+</head>
+
+<body ng-controller="MainController as main" ng-cloak>
+    <div class="main-container">
+        <div class="header">
+            <a class="mobile-menu" href="" ng-click="main.showMobileMenu = !main.showMobileMenu">
+                <img ng-if="main.showMobileMenu" src="ic_close_24px.svg" alt="close menu" />
+                <img ng-if="!main.showMobileMenu" src="ic_menu_24px.svg" alt="open menu" />
+            </a> My Books
+        </div>
+        <div class="top-bar" ng-show="main.show">
+            <a href="" ng-repeat="book in main.books">{{book.title}}</a>
+            <a href=""> Top 10 Austrialian beaches</a>
+        </div>
+        <div class="mobile-menu-container" ng-show="main.showMobileMenu">
+            <ul>
+                <li ng-repeat="book in main.books"><a href="">{{book.title}}</a></li>
+                <li><a href="">Top 10 Austrialian beaches</a></li>
+            </ul>
+        </div>
+        <select>
+            <option value="title">Sort by title</option>
+            <option value="author">Sort by author</option>
+        </select>
+        <div class="books-container">
+            <div class="column-item welcome-container" ng-hide="main.hideWelcome">
+                <div>
+                    <h2>Welcome back!</h2>
+                    <h3>It's been a while.</h3>
+                    <h3>Read any new book lately?</h3>
+                </div>
+                <div class="choices-container">
+                    <a href="" ng-click="main.hideWelcome = true">NO</a>
+                    <a href="" ng-click="main.openBookDialog()">Yes</a>
+                </div>
+            </div>
+            <div class="column-item ad-container">
+                <div class="ad-hero">
+                    <h2>Top 10 Australian beaches</h2>
+                </div>
+                <div>
+                    <p class="light-font">Number 10</p>
+                    <p>Whitehaven Bech</p>
+                    <p>Whitsunday Island, Whitesunday Island</p>
+                </div>
+                <div class="choices-container">
+                    <a href="#">share</a>
+                    <a href="#">explore</a>
+                </div>
+            </div>
+            <book ng-repeat="book in main.books" book="book"></book>
+        </div>
+    </div>
+    <div class="dark-mask" ng-show="main.showMobileMenu"></div>
+    <div class="modalDialog" ng-show="main.showBookEntryForm">
+        <form name="bookForm">
+            <div class="fields">
+                <input type="text" name="title" placeholder="title (required)" required ng-model="main.newBook.title">
+                <input type="text" name="title" placeholder="author (required)" required ng-model="main.newBook.author">
+            </div>
+            <div class="choices-container">
+                <a href="" ng-click="main.showBookEntryForm = false">Cancel</a>
+                <a href="" ng-click="main.submitNewBook()">Submit</a>
+            </div>
+        </form>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>

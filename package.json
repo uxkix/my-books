@@ -1,0 +1,29 @@
+{
+  "name": "my-books",
+  "dependencies": {
+    "gulp": "^3.9.0"
+  },
+  "description": "BIGCOMMERCE FRONT-END TEST",
+  "version": "1.0.0",
+  "main": "index.html",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-webserver": "^0.9.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uxkix/my-books.git"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "Junchao Zhang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uxkix/my-books/issues"
+  },
+  "homepage": "https://github.com/uxkix/my-books#readme"
+}
