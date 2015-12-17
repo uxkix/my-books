@@ -17,20 +17,23 @@
                 <img ng-if="!main.showMobileMenu" src="ic_menu_24px.svg" alt="open menu" />
             </a> My Books
         </div>
-        <div class="top-bar" ng-show="main.show">
-            <a href="" ng-repeat="book in main.books">{{book.title}}</a>
-            <a href=""> Top 10 Austrialian beaches</a>
+        <div class="top-bar">
+            <a href="" ng-click="main.searchText = book.title" ng-repeat="book in main.books">{{book.title}}</a>
+            <a href="">Top 10 Austrialian beaches</a>
         </div>
         <div class="mobile-menu-container" ng-show="main.showMobileMenu">
             <ul>
-                <li ng-repeat="book in main.books"><a href="">{{book.title}}</a></li>
+                <li ng-repeat="book in main.books"><a href="" ng-click="main.searchText = book.title">{{book.title}}</a></li>
                 <li><a href="">Top 10 Austrialian beaches</a></li>
             </ul>
         </div>
-        <select>
-            <option value="title">Sort by title</option>
-            <option value="author">Sort by author</option>
-        </select>
+        <div class="sorting-bar">
+            Sort By:
+            <select ng-model="main.sortBy">
+                <option value="title">Title</option>
+                <option value="author">Author</option>
+            </select>
+        </div>
         <div class="books-container">
             <div class="column-item welcome-container" ng-hide="main.hideWelcome">
                 <div>
@@ -53,25 +56,40 @@
                     <p>Whitsunday Island, Whitesunday Island</p>
                 </div>
                 <div class="choices-container">
-                    <a href="#">share</a>
-                    <a href="#">explore</a>
+                    <a href="">share</a>
+                    <a href="">explore</a>
                 </div>
             </div>
-            <book ng-repeat="book in main.books" book="book"></book>
+            <book ng-repeat="book in main.books | orderBy:main.sortBy | filter:main.searchText" book="book"></book>
         </div>
     </div>
     <div class="dark-mask" ng-show="main.showMobileMenu"></div>
-    <div class="modalDialog" ng-show="main.showBookEntryForm">
-        <form name="bookForm">
-            <div class="fields">
-                <input type="text" name="title" placeholder="title (required)" required ng-model="main.newBook.title">
-                <input type="text" name="title" placeholder="author (required)" required ng-model="main.newBook.author">
+    <div class="modalDialog animate-show" ng-show="main.showBookEntryForm">
+        <div class="book-form-container">
+            <div class="modal-header">
+                <a href="" ng-click="main.showBookEntryForm = false" class="close-btn"><img src="ic_close_24px.svg" alt="close dialog"></a>
             </div>
-            <div class="choices-container">
-                <a href="" ng-click="main.showBookEntryForm = false">Cancel</a>
-                <a href="" ng-click="main.submitNewBook()">Submit</a>
+            <form name="bookForm" ng-submit="bookForm.$valid && main.submitNewBook()">
+                <div class="fields">
+                    <input type="text" name="title" placeholder="title (required)" required ng-model="main.newBook.title">
+                    <input type="text" name="title" placeholder="author (required)" required ng-model="main.newBook.author">
+                </div>
+                <p ng-show="main.showValidationError" class="error-msg">The book is already in your list. Please enter a new one.</p>
+                <div class="choices-container">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modalDialog" ng-show="main.showSample">
+        <div class="sample-container">
+            <div class="modal-header">
+                <a href="" ng-click="main.showSample = false" class="close-btn"><img src="ic_close_24px.svg" alt="close dialog"></a>
             </div>
-        </form>
+            <div class="modal-body">
+                {{main.currentSample}}
+            </div>
+        </div>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script type="text/javascript" src="app.js"></script>

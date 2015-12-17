@@ -3,10 +3,12 @@
     <div class="content">
         <h2>{{book.title}}</h2>
         <p class="light-font">By {{book.author}}</p>
-        <p class="rating">{{book.rating}} of 5 stars</p>
+        <p class="rating">{{book.rating.value}} of 5 stars</p>
         <div class="choices-container">
-            <a href="#">Sample</a>
-            <a href="#">Review</a>
+            <a href="#" class="btn-sample" ng-click="showSample()">Sample</a>
+            <a href="#" class="btn-review">Review</a>
+            <select ng-model="book.rating" ng-options="option.text for option in ratingOptions track by option.value">
+            </select>
         </div>
     </div>
 </div>

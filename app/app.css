@@ -1,3 +1,5 @@
+/***** html and common use style *****/
+
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #D8D8D8;
@@ -9,10 +11,16 @@ body {
 a {
     text-decoration: none;
     color: inherit;
+    cursor: hand;
 }
 
 .light-font {
     color: #646464;
+}
+
+.error-msg {
+    color: #D41D1D;
+    font-size: 12px;
 }
 
 .main-container {
@@ -20,12 +28,42 @@ a {
     position: relative;
 }
 
+.choices-container {
+    margin-top: 20px;
+    padding: 10px 0;
+    text-transform: uppercase;
+}
+
+.choices-container a {
+    margin-right: 40px;
+}
+
+.choices-container a:nth-child(2) {
+    margin-right: 0;
+    color: #FF9D08;
+}
+
+.choices-container input[type="submit"] {
+    color: #FF9D08;
+    border: 0;
+    font-size: 14px;
+    background: none;
+}
+
+form input.ng-invalid.ng-touched {
+    border: 1px solid #D41D1D;
+}
+
+
+/***** top header *****/
+
 .header {
     background-color: #E81E63;
     color: #FFF;
     height: 64px;
     line-height: 64px;
     font-size: 24px;
+    padding-left: 10px;
 }
 
 .mobile-menu {
@@ -45,39 +83,37 @@ a {
     margin-right: 10px;
 }
 
-.choices-container {
-    margin-top: 20px;
-    padding: 10px 0;
+.sorting-bar {
+    height: 64px;
+    text-align: center;
+    line-height: 64px;
 }
 
-.choices-container a {
-    text-transform: uppercase;
-    margin-right: 40px;
+.sorting-bar select {
+    width: 80px;
 }
 
-.choices-container a:nth-child(2) {
-    margin-right: 0;
-    color: #FF9D08;
-}
+
+/***** main content *****/
 
 .books-container {
     -webkit-column-count: 3;
     -webkit-column-gap: 15px;
-    -webkit-column-fill: auto;
     -moz-column-count: 3;
     -moz-column-gap: 15px;
-    -moz-column-fill: auto;
     column-count: 3;
     column-gap: 15px;
-    column-fill: auto;
-    max-width: 1200px;
+    -webkit-column-width: 360px;
+    -moz-column-width: 360px;
+    column-width: 360px;
     padding: 10px;
     margin: 0 auto;
+    max-width: 1200px;
 }
 
 .column-item {
+    width: 100%;
     box-sizing: border-box;
-    width: 360px;
     background: #fefefe;
     border: 2px solid #fcfcfc;
     border-radius: 2px;
@@ -147,7 +183,7 @@ a {
 }
 
 
-/***** book entry form ******/
+/***** modal dialog ******/
 
 .modalDialog {
     position: fixed;
@@ -159,19 +195,61 @@ a {
     z-index: 100;
 }
 
-.modalDialog form {
-    width: 400px;
+.modalDialog > div {
     margin: 10% auto;
     border-radius: 5px;
     background: #FFF;
-    padding: 30px 10px;
     box-sizing: border-box;
+    position: relative;
+}
+
+.modal-header {
+    text-align: right;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.close-btn img {
+    height: 18px;
+    width: 18px;
+}
+
+
+/***** book entry form ******/
+
+.book-form-container {
+    width: 400px;
+}
+
+.modalDialog form {
+    margin: 30px 10px 5px 10px;
+}
+
+.fields input {
+    width: 90%;
+    height: 30px;
+    margin: 0 auto;
+    padding: 2px 10px;
+    font-size: 14px;
+}
+
+.fields input:first-child {
+    margin-bottom: 8px;
+}
+
+
+/***** sample dialog ******/
+
+.sample-container {
+    width: 90%;
 }
 
 
 /*  RESPONSIVE */
 
-@media (max-width: 1200px) and (min-width: 768px) {
+@media (max-width: 960px) and (min-width: 600px) {
     .books-container {
         -webkit-column-count: 2;
         -moz-column-count: 2;
@@ -179,7 +257,7 @@ a {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .books-container {
         -webkit-column-count: 1;
         -moz-column-count: 1;
